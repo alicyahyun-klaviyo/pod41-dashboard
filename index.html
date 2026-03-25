@@ -6,77 +6,92 @@
 <title>Pod 41 — Areas of Improvement</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f9fafb; color: #111827; font-size: 13px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; color: #1a1a1a; background: #f8fafc; }
   
   /* Header */
-  .header { background: #1a8a5a; color: white; padding: 18px 28px 14px; }
-  .header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
-  .header .meta { margin-top: 6px; font-size: 13px; opacity: 0.85; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-  .header a { color: rgba(255,255,255,0.9); text-decoration: underline; }
-  .header a:hover { color: white; }
+  .header { background: #1a8a5a; color: white; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-left h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .header-left .subtitle { font-size: 12px; opacity: 0.85; margin-top: 3px; }
+  .header-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .header-links a { color: rgba(255,255,255,0.9); text-decoration: none; background: rgba(255,255,255,0.15); border-radius: 6px; padding: 5px 12px; font-size: 12px; font-weight: 500; border: 1px solid rgba(255,255,255,0.25); transition: background 0.15s; }
+  .header-links a:hover { background: rgba(255,255,255,0.25); }
   
-  /* Filter bar */
-  .filter-bar { background: white; border-bottom: 1px solid #e5e7eb; padding: 12px 28px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; position: sticky; top: 0; z-index: 10; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
-  .filter-bar label { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
-  .filter-bar select, .filter-bar input { border: 1.5px solid #d1fae5; border-radius: 6px; padding: 6px 10px; font-size: 13px; color: #111827; background: white; outline: none; }
-  .filter-bar select:focus, .filter-bar input:focus { border-color: #1a8a5a; box-shadow: 0 0 0 2px rgba(26,138,90,0.15); }
-  .filter-bar .clear-btn { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 14px; font-size: 12px; color: #6b7280; cursor: pointer; font-weight: 500; }
-  .filter-bar .clear-btn:hover { background: #e5e7eb; color: #374151; }
-  .count-badge { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 12px; padding: 3px 10px; font-size: 12px; font-weight: 600; margin-left: auto; }
+  /* Filters */
+  .filters { background: white; padding: 12px 24px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .filter-group { display: flex; align-items: center; gap: 6px; }
+  .filter-group label { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .filters select, .filters input { border: 1px solid #d1d5db; border-radius: 6px; padding: 5px 10px; font-size: 12px; color: #374151; background: white; outline: none; transition: border 0.15s; }
+  .filters select:focus, .filters input:focus { border-color: #1a8a5a; box-shadow: 0 0 0 2px rgba(26,138,90,0.1); }
+  .filters input { width: 200px; }
+  .btn-clear { background: #f1f5f9; border: 1px solid #d1d5db; border-radius: 6px; padding: 5px 14px; font-size: 12px; color: #64748b; cursor: pointer; font-weight: 500; transition: all 0.15s; }
+  .btn-clear:hover { background: #e2e8f0; color: #374151; }
+  .result-count { margin-left: auto; font-size: 11px; color: #94a3b8; font-weight: 500; }
   
   /* Table */
-  .table-wrap { padding: 20px 28px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-  thead tr { background: #1a8a5a; }
-  thead th { padding: 11px 14px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: white; white-space: nowrap; }
-  tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.1s; }
-  tbody tr:hover { background: #f0fdf4; }
+  .table-wrap { padding: 16px 24px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px #e2e8f0; }
+  thead th { background: #1a8a5a; color: white; padding: 10px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; text-align: left; white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.1s; }
   tbody tr:last-child { border-bottom: none; }
-  tbody td { padding: 10px 14px; vertical-align: top; line-height: 1.5; }
-  tbody td a { color: #1a8a5a; text-decoration: none; font-weight: 500; }
-  tbody td a:hover { text-decoration: underline; }
+  tbody tr:hover { background: #f8fffe; }
+  tbody td { padding: 10px 12px; vertical-align: top; line-height: 1.45; }
   
-  /* Tags */
-  .tag-ikb { display: inline-block; background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; border-radius: 5px; padding: 2px 7px; font-size: 11px; font-weight: 500; margin: 2px 2px 2px 0; text-decoration: none !important; white-space: nowrap; }
-  .tag-ikb:hover { background: #ffedd5 !important; }
-  .tag-hc { display: inline-block; background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; border-radius: 5px; padding: 2px 7px; font-size: 11px; font-weight: 500; margin: 2px 2px 2px 0; text-decoration: none !important; white-space: nowrap; }
-  .tag-hc:hover { background: #dcfce7 !important; }
+  .col-date { white-space: nowrap; color: #64748b; font-size: 12px; min-width: 90px; }
+  .col-agent { white-space: nowrap; font-weight: 500; min-width: 90px; }
+  .col-area { color: #374151; min-width: 120px; font-size: 12px; }
+  .col-ticket { white-space: nowrap; min-width: 80px; }
+  .col-ticket a { color: #1a8a5a; text-decoration: none; font-weight: 600; font-size: 12px; }
+  .col-ticket a:hover { text-decoration: underline; }
+  .col-summary { max-width: 320px; color: #374151; font-size: 12px; }
+  .col-guides { min-width: 200px; max-width: 280px; }
+  
+  /* Guide tags */
+  .tag { display: inline-block; border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: 500; text-decoration: none; margin: 2px 2px 2px 0; line-height: 1.6; }
+  .tag-ikb { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+  .tag-ikb:hover { background: #ffedd5; }
+  .tag-hc { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .tag-hc:hover { background: #dcfce7; }
   
   /* No results */
-  .no-results { display: none; padding: 40px; text-align: center; color: #9ca3af; font-size: 14px; }
+  .no-results { display: none; text-align: center; padding: 40px; color: #94a3b8; font-size: 14px; }
   
   /* Footer */
-  .footer { background: white; border-top: 1px solid #e5e7eb; padding: 14px 28px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 12px; color: #6b7280; }
-  .footer a { color: #1a8a5a; text-decoration: none; font-weight: 500; }
+  .footer { padding: 16px 24px; border-top: 1px solid #e2e8f0; background: white; display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #64748b; margin-top: 16px; }
+  .footer a { color: #1a8a5a; text-decoration: none; }
   .footer a:hover { text-decoration: underline; }
-  .footer .footer-label { font-weight: 600; color: #374151; }
+  
+  /* Hidden rows */
+  tr.hidden { display: none; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Pod 41 — Areas of Improvement</h1>
-  <div class="meta">
-    <span>Updated: 25 Mar 2026</span>
-    <span>·</span>
-    <a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58" target="_blank">📢 Slack Channel</a>
-    <span>·</span>
+  <div class="header-left">
+    <h1>Pod 41 — Areas of Improvement</h1>
+    <div class="subtitle">Last updated: 25 Mar 2026 &nbsp;·&nbsp; 21 tickets (last 90 days)</div>
+  </div>
+  <div class="header-links">
+    <a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58" target="_blank">💬 Slack Channel</a>
     <a href="https://docs.google.com/spreadsheets/d/17TX2Iq1oRELlMRzEIhpr-5kOtj9zaplTvrD8OF1Iy4Y/edit?gid=2132527901#gid=2132527901" target="_blank">📊 Google Sheet</a>
   </div>
 </div>
 
-<div class="filter-bar">
-  <label>👤 Agent</label>
-  <select id="agentFilter" onchange="applyFilters()">
-    <option value="">All Agents</option>
-    <option value="Ash Arraiza">Ash Arraiza</option>
+<div class="filters">
+  <div class="filter-group">
+    <label>👤 Agent</label>
+    <select id="filter-agent" onchange="applyFilters()">
+      <option value="">All Agents</option>
+      <option value="Ash Arraiza">Ash Arraiza</option>
 <option value="Chris Yinfoo">Chris Yinfoo</option>
 <option value="Meher Gambhir">Meher Gambhir</option>
-  </select>
-  <label>📁 Area</label>
-  <select id="areaFilter" onchange="applyFilters()">
-    <option value="">All Areas</option>
-    <option value="AU Branded Sender ID registration">AU Branded Sender ID registration</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>📁 Area</label>
+    <select id="filter-area" onchange="applyFilters()">
+      <option value="">All Areas</option>
+      <option value="AU Branded Sender ID registration">AU Branded Sender ID registration</option>
 <option value="Back In Stock Flow / Custom Catalog">Back In Stock Flow / Custom Catalog</option>
 <option value="Campaign (omni)">Campaign (omni)</option>
 <option value="Campaign Translation - Profile Email Preview">Campaign Translation - Profile Email Preview</option>
@@ -97,15 +112,18 @@
 <option value="Segment Growth (Dropped figure)">Segment Growth (Dropped figure)</option>
 <option value="Shopify - Email Subscription Status">Shopify - Email Subscription Status</option>
 <option value="TFN Rejection">TFN Rejection</option>
-  </select>
-  <label>🔎 Search</label>
-  <input type="text" id="searchFilter" placeholder="Search summaries..." oninput="applyFilters()" style="width:220px;">
-  <button class="clear-btn" onclick="clearFilters()">✕ Clear</button>
-  <span class="count-badge" id="countBadge">21 tickets</span>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>🔎 Search</label>
+    <input type="text" id="filter-search" placeholder="Search tickets..." oninput="applyFilters()">
+  </div>
+  <button class="btn-clear" onclick="clearFilters()">Clear</button>
+  <span class="result-count" id="result-count">21 tickets</span>
 </div>
 
 <div class="table-wrap">
-  <table id="ticketTable">
+  <table id="ticket-table">
     <thead>
       <tr>
         <th>Date</th>
@@ -116,241 +134,296 @@
         <th>Help Guides</th>
       </tr>
     </thead>
-    <tbody id="tableBody">
-      
-    <tr data-agent="Chris Yinfoo" data-area="MailChimp Import" data-summary="the customer had some initial issues with the mailchimp integration and some advice has been given to assist with the remainder of the sync">
-      <td style="white-space:nowrap;color:#374151;">24 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">MailChimp Import</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3857275" target="_blank">#3857275</a></td>
-      <td style="color:#374151;">The customer had some initial issues with the MailChimp integration and some advice has been given to assist with the remainder of the sync</td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+    <tbody id="ticket-body">
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="MailChimp Import" 
+      data-search="the customer had some initial issues with the mailchimp integration and some advice has been given to assist with the remainder of the sync mailchimp import chris yinfoo">
+      <td class="col-date">24 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">MailChimp Import</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3857275" target="_blank">#3857275</a></td>
+      <td class="col-summary">The customer had some initial issues with the MailChimp integration and some advice has been given to assist with the remainder of the sync</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Segment Growth (Dropped figure)" data-summary="the customer is trying to wrap their head around the larger than expected dropped figure for the 23rd march 2026">
-      <td style="white-space:nowrap;color:#374151;">24 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Segment Growth (Dropped figure)</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3869515" target="_blank">#3869515</a></td>
-      <td style="color:#374151;">The customer is trying to wrap their head around the larger than expected dropped figure for the 23rd March 2026</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Segment Growth (Dropped figure)" 
+      data-search="the customer is trying to wrap their head around the larger than expected dropped figure for the 23rd march 2026 segment growth (dropped figure) chris yinfoo">
+      <td class="col-date">24 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Segment Growth (Dropped figure)</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3869515" target="_blank">#3869515</a></td>
+      <td class="col-summary">The customer is trying to wrap their head around the larger than expected dropped figure for the 23rd March 2026</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="SFCC ecommerce" data-summary="the customer is running into the sfcc
-```type: authorizationheadermissingexception```">
-      <td style="white-space:nowrap;color:#374151;">23 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">SFCC ecommerce</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3821881" target="_blank">#3821881</a></td>
-      <td style="color:#374151;">The customer is running into the SFCC
-```"type": "AuthorizationHeaderMissingException"```</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501738348315-Troubleshooting-SFCC-Catalog-Product-URL-Override" target="_blank" class="tag-ikb">🟠 IKB: Troubleshooting SFCC Catalog / Product URL Override</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="SFCC ecommerce" 
+      data-search="the customer is running into the sfcc ```"type": "authorizationheadermissingexception"``` sfcc ecommerce chris yinfoo">
+      <td class="col-date">23 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">SFCC ecommerce</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3821881" target="_blank">#3821881</a></td>
+      <td class="col-summary">The customer is running into the SFCC ```"type": "AuthorizationHeaderMissingException"```</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501738348315-Troubleshooting-SFCC-Catalog-Product-URL-Override" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshooting SFCC Catalog / Product URL Override</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Flow webhook bulk suppress" data-summary="the customer is wondering why the webhook was not actioned as the profile is still subscribed">
-      <td style="white-space:nowrap;color:#374151;">23 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Flow webhook bulk suppress</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3864157" target="_blank">#3864157</a></td>
-      <td style="color:#374151;">The customer is wondering why the webhook was not actioned as the profile is still Subscribed</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Flow webhook bulk suppress" 
+      data-search="the customer is wondering why the webhook was not actioned as the profile is still subscribed flow webhook bulk suppress chris yinfoo">
+      <td class="col-date">23 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Flow webhook bulk suppress</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3864157" target="_blank">#3864157</a></td>
+      <td class="col-summary">The customer is wondering why the webhook was not actioned as the profile is still Subscribed</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
     </tr>
-    <tr data-agent="Ash Arraiza" data-area="Shopify - Email Subscription Status" data-summary="shopify is resubscribing profiles immediately after unsubscribing.">
-      <td style="white-space:nowrap;color:#374151;">23 Mar 2026</td>
-      <td style="color:#374151;">Ash Arraiza</td>
-      <td style="color:#374151;">Shopify - Email Subscription Status</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3863166" target="_blank">#3863166</a></td>
-      <td style="color:#374151;">Shopify is resubscribing profiles immediately after unsubscribing.</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
+<tr 
+      data-agent="Ash Arraiza" 
+      data-area="Shopify - Email Subscription Status" 
+      data-search="shopify is resubscribing profiles immediately after unsubscribing. shopify - email subscription status ash arraiza">
+      <td class="col-date">23 Mar 2026</td>
+      <td class="col-agent">Ash Arraiza</td>
+      <td class="col-area">Shopify - Email Subscription Status</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3863166" target="_blank">#3863166</a></td>
+      <td class="col-summary">Shopify is resubscribing profiles immediately after unsubscribing.</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="Landing Pages Font Size issue" data-summary="landing page subscribe button + input text on mobile look much smaller than the configured font size. on the same device, a 16px button on a popup form looks no">
-      <td style="white-space:nowrap;color:#374151;">17 Mar 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">Landing Pages Font Size issue</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3854114" target="_blank">#3854114</a></td>
-      <td style="color:#374151;">Landing page subscribe button + input text on mobile look much smaller than the configured font size. On the same device, a 16px button on a popup form looks no</td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="Landing Pages Font Size issue" 
+      data-search="landing page subscribe button + input text on mobile look much smaller than the configured font size. on the same device, a 16px button on a popup form looks... landing pages font size issue meher gambhir">
+      <td class="col-date">17 Mar 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">Landing Pages Font Size issue</td>
+      <td class="col-ticket"><a href="https://kklaviyo.zendesk.com/agent/tickets/3854114" target="_blank">#3854114</a></td>
+      <td class="col-summary">Landing page subscribe button + input text on mobile look much smaller than the configured font size. On the same device, a 16px button on a popup form looks...</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Campaign Translation - Profile Email Preview" data-summary="the customer has translation enabled and for the below example fr, when checking the profile message sent preview, it appears in english
-
-they want to confirm i">
-      <td style="white-space:nowrap;color:#374151;">17 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Campaign Translation - Profile Email Preview</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3814046" target="_blank">#3814046</a></td>
-      <td style="color:#374151;">The customer has translation enabled and for the below example FR, when checking the profile message sent preview, it appears in English
-
-They want to confirm i</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Campaign Translation - Profile Email Preview" 
+      data-search="the customer has translation enabled and for the below example fr, when checking the profile message sent preview, it appears in english they want to confirm... campaign translation - profile email preview chris yinfoo">
+      <td class="col-date">17 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Campaign Translation - Profile Email Preview</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3814046" target="_blank">#3814046</a></td>
+      <td class="col-summary">The customer has translation enabled and for the below example FR, when checking the profile message sent preview, it appears in English They want to confirm...</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
     </tr>
-    <tr data-agent="Ash Arraiza" data-area="Coupon (unique) in flow" data-summary="message is being skipped due to unable to create coupon">
-      <td style="white-space:nowrap;color:#374151;">10 Mar 2026</td>
-      <td style="color:#374151;">Ash Arraiza</td>
-      <td style="color:#374151;">Coupon (unique) in flow</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3835228" target="_blank">#3835228</a></td>
-      <td style="color:#374151;">Message is being skipped due to Unable to Create Coupon</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/17814602332443-Troubleshooting-Shopify-coupons" target="_blank" class="tag-ikb">🟠 IKB: Troubleshooting Shopify Coupons</a> <a href="https://help.klaviyo.com/hc/en-us/articles/115005253088" target="_blank" class="tag-hc">🟢 HC: Unique Coupon Codes in Flows</a></td>
+<tr 
+      data-agent="Ash Arraiza" 
+      data-area="Coupon (unique) in flow" 
+      data-search="message is being skipped due to unable to create coupon coupon (unique) in flow ash arraiza">
+      <td class="col-date">10 Mar 2026</td>
+      <td class="col-agent">Ash Arraiza</td>
+      <td class="col-area">Coupon (unique) in flow</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3835228" target="_blank">#3835228</a></td>
+      <td class="col-summary">Message is being skipped due to Unable to Create Coupon</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/17814602332443-Troubleshooting-Shopify-coupons" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshooting Shopify Coupons</a>
+<a href="https://help.klaviyo.com/hc/en-us/articles/115005253088" target="_blank" class="tag tag-hc">🟢 HC: Unique Coupon Codes in Flows</a></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="Custom Object Error" data-summary="cx cannot move past the first step of the custom objects “create object” wizard. after we enter the name and data source and click next, nothing happens in the ">
-      <td style="white-space:nowrap;color:#374151;">10 Mar 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">Custom Object Error</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3834786" target="_blank">#3834786</a></td>
-      <td style="color:#374151;">CX cannot move past the first step of the Custom Objects “Create object” wizard. After we enter the Name and Data source and click Next, nothing happens in the </td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="Custom Object Error" 
+      data-search="cx cannot move past the first step of the custom objects “create object” wizard. after we enter the name and data source and click next, nothing happens in t... custom object error meher gambhir">
+      <td class="col-date">10 Mar 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">Custom Object Error</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3834786" target="_blank">#3834786</a></td>
+      <td class="col-summary">CX cannot move past the first step of the Custom Objects “Create object” wizard. After we enter the Name and Data source and click Next, nothing happens in t...</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Flow Monitor Alert" data-summary="the amount of emails being sent from flow has dropped since the 28th of feb, customer at loss as to what's causing this slowdown in traffic
-
-i also saw the fa">
-      <td style="white-space:nowrap;color:#374151;">10 Mar 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Flow Monitor Alert</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3829647" target="_blank">#3829647</a></td>
-      <td style="color:#374151;">The amount of emails being sent from flow has dropped since the 28th of Feb, customer at loss as to what's causing this slowdown in traffic
-
-"I also saw the "fa</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
+<hr 
+      data-agent="Chris Yinfoo" 
+      data-area="Flow Monitor Alert" 
+      data-search="the amount of emails being sent from flow has dropped since the 28th of feb, customer at loss as to what's causing this slowdown in traffic flow monitor alert chris yinfoo">
+      <td class="col-date">10 Mar 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Flow Monitor Alert</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3829647" target="_blank">#3829647</a></td>
+      <td class="col-summary">The amount of emails being sent from flow has dropped since the 28th of Feb, customer at loss as to what's causing this slowdown in traffic</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
+    </tr>s to Suppress Profiles</a></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="Cloning Campaign Showing Error" data-summary="customer gets a 400 error when trying to clone a specific campaign in the same account. the clone screen sometimes shows details from a different account, so it">
-      <td style="white-space:nowrap;color:#374151;">6 Mar 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">Cloning Campaign Showing Error</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3823710" target="_blank">#3823710</a></td>
-      <td style="color:#374151;">Customer gets a 400 error when trying to clone a specific campaign in the same account. The clone screen sometimes shows details from a different account, so it</td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="Cloning Campaign Showing Error" 
+      data-search="customer gets a 400 error when trying to clone a specific campaign in the same account. the clone screen sometimes shows details from a different account, so... cloning campaign showing error meher gambhir">
+      <td class="col-date">6 Mar 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">Cloning Campaign Showing Error</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3823710" target="_blank">#3823710</a></td>
+      <td class="col-summary">Customer gets a 400 error when trying to clone a specific campaign in the same account. The clone screen sometimes shows details from a different account, so...</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="Flows / Helpdesk (Ticket Created trigger + Internal alerts)" data-summary="this customer uses helpdesk + flows to send internal sales notifications when high‑value customers (e.g. shopify tag `rkardashian`) open a ticket. these notific">
-      <td style="white-space:nowrap;color:#374151;">27 Feb 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">Flows / Helpdesk (Ticket Created trigger + Internal alerts)</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3780453" target="_blank">#3780453</a></td>
-      <td style="color:#374151;">This customer uses Helpdesk + flows to send internal Sales notifications when high‑value customers (e.g. Shopify tag `RKardashian`) open a ticket. These notific</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="Flows / Helpdesk (Ticket Created trigger + Internal alerts)" 
+      data-search="this customer uses helpdesk + flows to send internal sales notifications when high‑value customers (e.g. shopify tag `rkardashian`) open a ticket. these noti... flows / helpdesk (ticket created trigger + internal alerts) meher gambhir">
+      <td class="col-date">27 Feb 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">Flows / Helpdesk (Ticket Created trigger + Internal alerts)</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3780453" target="_blank">#3780453</a></td>
+      <td class="col-summary">This customer uses Helpdesk + flows to send internal Sales notifications when high‑value customers (e.g. Shopify tag `RKardashian`) open a ticket. These noti...</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="Deleted Segment" data-summary="customer reports that segment *bounced during black friday & never recieved (id uqnkji) has disappeared and states that no one on their team deleted it. the s">
-      <td style="white-space:nowrap;color:#374151;">26 Feb 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">Deleted Segment</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3788822" target="_blank">#3788822</a></td>
-      <td style="color:#374151;">Customer reports that segment "*Bounced during Black Friday & Never Recieved" (ID UqnkJi) has disappeared and states that no one on their team deleted it. The s</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="Deleted Segment" 
+      data-search="customer reports that segment "*bounced during black friday & never recieved" (id uqnkji) has disappeared and states that no one on their team deleted it. th... deleted segment meher gambhir">
+      <td class="col-date">26 Feb 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">Deleted Segment</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3788822" target="_blank">#3788822</a></td>
+      <td class="col-summary">Customer reports that segment "*Bounced during Black Friday & Never Recieved" (ID UqnkJi) has disappeared and states that no one on their team deleted it. Th...</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501697892251-Reference-Profile-Deletion-Logs" target="_blank" class="tag tag-ikb">🟠 IKB: Reference: Profile Deletion Logs (Splunk)</a></td>
     </tr>
-    <tr data-agent="Meher Gambhir" data-area="AU Branded Sender ID registration" data-summary="customer (http://shopcowgirlcrush.com|shopcowgirlcrush.com) is trying to complete au branded sender id registration. from settings → text messages → sender in">
-      <td style="white-space:nowrap;color:#374151;">23 Feb 2026</td>
-      <td style="color:#374151;">Meher Gambhir</td>
-      <td style="color:#374151;">AU Branded Sender ID registration</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3777579" target="_blank">#3777579</a></td>
-      <td style="color:#374151;">Customer (<http://shopcowgirlcrush.com|shopcowgirlcrush.com>) is trying to complete AU branded sender ID registration. From Settings → Text messages → Sender in</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501753381275" target="_blank" class="tag-ikb">🟠 IKB: Troubleshooting & FAQ: SMS — AU Branded Sender ID</a> <a href="https://help.klaviyo.com/hc/en-us/articles/6637671573403" target="_blank" class="tag-hc">🟢 HC: Understanding SMS Sending Numbers — AU</a></td>
+<tr 
+      data-agent="Meher Gambhir" 
+      data-area="AU Branded Sender ID registration" 
+      data-search="customer (<http://shopcowgirlcrush.com|shopcowgirlcrush.com>) is trying to complete au branded sender id registration. from settings → text messages → sender... au branded sender id registration meher gambhir">
+      <td class="col-date">23 Feb 2026</td>
+      <td class="col-agent">Meher Gambhir</td>
+      <td class="col-area">AU Branded Sender ID registration</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3777579" target="_blank">#3777579</a></td>
+      <td class="col-summary">Customer (shopcowgirlcrush.com) is trying to complete AU branded sender ID registration. From Settings → Text messages → Sender...</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501753381275" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshooting & FAQ: SMS — AU Branded Sender ID</a>
+<a href="https://help.klaviyo.com/hc/en-us/articles/6637671573403" target="_blank" class="tag tag-hc">🟢 HC: Understanding SMS Sending Numbers — AU</a></td>
     </tr>
-    <tr data-agent="Ash Arraiza" data-area="TFN Rejection" data-summary="• customer has a paraphernalia (weed) store and is being rejected for us and canadian tfn. 
-• unsure which team to send to compliance, d&c or sms activations.">
-      <td style="white-space:nowrap;color:#374151;">17 Feb 2026</td>
-      <td style="color:#374151;">Ash Arraiza</td>
-      <td style="color:#374151;">TFN Rejection</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3765499" target="_blank">#3765499</a></td>
-      <td style="color:#374151;">• Customer has a paraphernalia (weed) store and is being rejected for US and Canadian TFN. 
-• Unsure which team to send to Compliance, D&C or SMS Activations.</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/37978898170523-Concentrix-Deliverability-Compliance-Troubleshooting-FAQs" target="_blank" class="tag-ikb">🟠 IKB: Concentrix Deliverability & Compliance FAQ — TFN</a></td>
+<tr 
+      data-agent="Ash Arraiza" 
+      data-area="TFN Rejection" 
+      data-search="• customer has a paraphernalia (weed) store and is being rejected for us and canadian tfn. • unsure which team to send to compliance, d&c or sms activations. tfn rejection ash arraiza">
+      <td class="col-date">17 Feb 2026</td>
+      <td class="col-agent">Ash Arraiza</td>
+      <td class="col-area">TFN Rejection</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3765499" target="_blank">#3765499</a></td>
+      <td class="col-summary">• Customer has a paraphernalia (weed) store and is being rejected for US and Canadian TFN. • Unsure which team to send to Compliance, D&C or SMS Activations.</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/37978898170523-Concentrix-Deliverability-Compliance-Troubleshooting-FAQs" target="_blank" class="tag tag-ikb">🟠 IKB: Concentrix Deliverability & Compliance FAQ — TFN</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Price drop flow / WooCommerce -> Shopify Change" data-summary="the customer has recently updated their ecomm store from woo to shopify
-
-they have a price drop flow which has been cloned from the original one and they would ">
-      <td style="white-space:nowrap;color:#374151;">17 Feb 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Price drop flow / WooCommerce -> Shopify Change</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3764988" target="_blank">#3764988</a></td>
-      <td style="color:#374151;">The customer has recently updated their ecomm store from Woo to Shopify
-
-They have a price drop flow which has been cloned from the original one and they would </td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Price drop flow / WooCommerce -> Shopify Change" 
+      data-search="the customer has recently updated their ecomm store from woo to shopify they have a price drop flow which has been cloned from the original one and they woul... price drop flow / woocommerce -> shopify change chris yinfoo">
+      <td class="col-date">17 Feb 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Price drop flow / WooCommerce -> Shopify Change</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3764988" target="_blank">#3764988</a></td>
+      <td class="col-summary">The customer has recently updated their ecomm store from Woo to Shopify They have a price drop flow which has been cloned from the original one and they woul...</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
     </tr>
-    <tr data-agent="Ash Arraiza" data-area="Campaign (omni)" data-summary="• cx cannot clone campaign to another account (from au to nz accounts)">
-      <td style="white-space:nowrap;color:#374151;">13 Feb 2026</td>
-      <td style="color:#374151;">Ash Arraiza</td>
-      <td style="color:#374151;">Campaign (omni)</td>
-      <td style="text-align:center;"><a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58/p1770957219649239" target="_blank">Thread ↗</a></td>
-      <td style="color:#374151;">• Cx cannot clone campaign to another account (from AU to NZ accounts)</td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+<tr 
+      data-agent="Ash Arraiza" 
+      data-area="Campaign (omni)" 
+      data-search="• cx cannot clone campaign to another account (from au to nz accounts) campaign (omni) ash arraiza">
+      <td class="col-date">13 Feb 2026</td>
+      <td class="col-agent">Ash Arraiza</td>
+      <td class="col-area">Campaign (omni)</td>
+      <td class="col-ticket"><a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58/p1770957219649239" target="_blank">Thread ↗</a></td>
+      <td class="col-summary">• Cx cannot clone campaign to another account (from AU to NZ accounts)</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Predictive analytics (Customer Lifetime Value)" data-summary="the customer believes they meet the criteria for clv however they notice the message when looking into a profile">
-      <td style="white-space:nowrap;color:#374151;">9 Feb 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Predictive analytics (Customer Lifetime Value)</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3736907" target="_blank">#3736907</a></td>
-      <td style="color:#374151;">The customer believes they meet the criteria for CLV however they notice the message when looking into a profile</td>
-      <td><a href="https://help.klaviyo.com/hc/en-us/articles/360020919731" target="_blank" class="tag-hc">🟢 HC: Understanding Predictive Analytics — CLV</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Predictive analytics (Customer Lifetime Value)" 
+      data-search="the customer believes they meet the criteria for clv however they notice the message when looking into a profile predictive analytics (customer lifetime value) chris yinfoo">
+      <td class="col-date">9 Feb 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Predictive analytics (Customer Lifetime Value)</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3736907" target="_blank">#3736907</a></td>
+      <td class="col-summary">The customer believes they meet the criteria for CLV however they notice the message when looking into a profile</td>
+      <td class="col-guides"><a href="https://help.klaviyo.com/hc/en-us/articles/360020919731" target="_blank" class="tag tag-hc">🟢 HC: Understanding Predictive Analytics — CLV</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="SMS Usage Reporting" data-summary="the customer would like the figures for the below graph but for the period january - dec 2025
-
-the current view only does last 12 months">
-      <td style="white-space:nowrap;color:#374151;">4 Feb 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">SMS Usage Reporting</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3720575" target="_blank">#3720575</a></td>
-      <td style="color:#374151;">The customer would like the figures for the below graph but for the period January - Dec 2025
-
-The current view only does last 12 months</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/19195983304347-Troubleshooting-FAQ-Support-Contracted-Manual-Billing" target="_blank" class="tag-ikb">🟠 IKB: Contracted Manual Billing — SMS Usage over 12 months</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="SMS Usage Reporting" 
+      data-search="the customer would like the figures for the below graph but for the period january - dec 2025 the current view only does last 12 months sms usage reporting chris yinfoo">
+      <td class="col-date">4 Feb 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">SMS Usage Reporting</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3720575" target="_blank">#3720575</a></td>
+      <td class="col-summary">The customer would like the figures for the below graph but for the period January - Dec 2025 The current view only does last 12 months</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/19195983304347-Troubleshooting-FAQ-Support-Contracted-Manual-Billing" target="_blank" class="tag tag-ikb">🟠 IKB: Contracted Manual Billing — SMS Usage over 12 months</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Back In Stock Flow / Custom Catalog" data-summary="the customer updated their inventory for an item and wondering why the bis report still says queued for some products with the same name">
-      <td style="white-space:nowrap;color:#374151;">27 Jan 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Back In Stock Flow / Custom Catalog</td>
-      <td style="text-align:center;"><a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58/p1769474820595639" target="_blank">Thread ↗</a></td>
-      <td style="color:#374151;">The customer updated their inventory for an item and wondering why the BIS report still says queued for some products with the same name</td>
-      <td><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a> <a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Back In Stock Flow / Custom Catalog" 
+      data-search="the customer updated their inventory for an item and wondering why the bis report still says queued for some products with the same name back in stock flow / custom catalog chris yinfoo">
+      <td class="col-date">27 Jan 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Back In Stock Flow / Custom Catalog</td>
+      <td class="col-ticket"><a href="https://klaviyo.enterprise.slack.com/archives/C06MP0YHY58/p1769474820595639" target="_blank">Thread ↗</a></td>
+      <td class="col-summary">The customer updated their inventory for an item and wondering why the BIS report still says queued for some products with the same name</td>
+      <td class="col-guides"><a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/33917757925531-Troubleshoot-Flow-webhooks-to-suppress-profiles" target="_blank" class="tag tag-ikb">🟠 IKB: Troubleshoot Flow Webhooks to Suppress Profiles</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/15501654658971-SFTP-Troubleshooting-Guide" target="_blank" class="tag tag-ikb">🟠 IKB: SFTP Troubleshooting Guide</a>
+<a href="https://klaviyo-internal-kb.zendesk.com/hc/en-us/articles/21978870091291-Using-PostmanLite-to-Troubleshoot-Integrations-in-Staffside" target="_blank" class="tag tag-ikb">🟠 IKB: PostmanLite to Troubleshoot Integrations</a></td>
     </tr>
-    <tr data-agent="Chris Yinfoo" data-area="Klaviyo app embed remains off as displayed in Klaviyo" data-summary="the customer's shopify onsite tracking says it's 'turned off', however they see a message in shopify to advise it's activated">
-      <td style="white-space:nowrap;color:#374151;">22 Jan 2026</td>
-      <td style="color:#374151;">Chris Yinfoo</td>
-      <td style="color:#374151;">Klaviyo app embed remains off as displayed in Klaviyo</td>
-      <td style="text-align:center;"><a href="https://klaviyo.zendesk.com/agent/tickets/3659792" target="_blank">#3659792</a></td>
-      <td style="color:#374151;">The customer's Shopify Onsite Tracking says it's 'Turned Off', however they see a message in Shopify to advise it's Activated</td>
-      <td><span style="color:#9ca3af;font-size:12px;">—</span></td>
+<tr 
+      data-agent="Chris Yinfoo" 
+      data-area="Klaviyo app embed remains off as displayed in Klaviyo" 
+      data-search="the customer's shopify onsite tracking says it's 'turned off', however they see a message in shopify to advise it's activated klaviyo app embed remains off as displayed in klaviyo chris yinfoo">
+      <td class="col-date">22 Jan 2026</td>
+      <td class="col-agent">Chris Yinfoo</td>
+      <td class="col-area">Klaviyo app embed remains off as displayed in Klaviyo</td>
+      <td class="col-ticket"><a href="https://klaviyo.zendesk.com/agent/tickets/3659792" target="_blank">#3659792</a></td>
+      <td class="col-summary">The customer's Shopify Onsite Tracking says it's 'Turned Off', however they see a message in Shopify to advise it's Activated</td>
+      <td class="col-guides"><span style="color:#aaa">—</span></td>
     </tr>
     </tbody>
   </table>
-  <div class="no-results" id="noResults">No matching tickets found.</div>
+  <div class="no-results" id="no-results">No matching tickets found.</div>
 </div>
 
 <div class="footer">
-  <span class="footer-label">Resources:</span>
-  <a href="https://klaviyo.enterprise.slack.com/docs/T029KGL8E/F079C9D5771" target="_blank">📋 Slack Canvas</a>
-  <a href="https://docs.google.com/document/d/1TNBnNCbSnv5_vC_FOlsVmviNZIcWpucPDzpXi_jGUKo/edit?tab=t.0" target="_blank">📄 Dev Pod Qual Doc</a>
-  <span style="margin-left:auto;color:#d1d5db;">Pod 41 Dashboard · 25 Mar 2026</span>
+  <span>🗒️ <a href="https://klaviyo.enterprise.slack.com/docs/T029KGL8E/F079C9D5771" target="_blank">Slack Canvas</a></span>
+  <span>📄 <a href="https://docs.google.com/document/d/1TNBnNCbSnv5_vC_FOlsVmviNZIcWpucPDzpXi_jGUKo/edit?tab=t.0" target="_blank">Dev Pod Qual Doc</a></span>
+  <span style="margin-left:auto">Generated 25 Mar 2026</span>
 </div>
 
 <script>
 function applyFilters() {
-  const agent = document.getElementById('agentFilter').value;
-  const area = document.getElementById('areaFilter').value;
-  const search = document.getElementById('searchFilter').value.toLowerCase().trim();
-  const rows = document.querySelectorAll('#tableBody tr');
+  const agent = document.getElementById('filter-agent').value.toLowerCase();
+  const area = document.getElementById('filter-area').value.toLowerCase();
+  const search = document.getElementById('filter-search').value.toLowerCase();
+  
+  const rows = document.querySelectorAll('#ticket-body tr');
   let visible = 0;
+  
   rows.forEach(row => {
-    const rowAgent = row.dataset.agent || '';
-    const rowArea = row.dataset.area || '';
-    const rowSummary = row.dataset.summary || '';
-    const rowText = (rowAgent + ' ' + rowArea + ' ' + rowSummary).toLowerCase();
-    const agentMatch = !agent || rowAgent === agent;
-    const areaMatch = !area || rowArea === area;
-    const searchMatch = !search || rowText.includes(search);
+    const rAgent = (row.dataset.agent || '').toLowerCase();
+    const rArea = (row.dataset.area || '').toLowerCase();
+    const rSearch = (row.dataset.search || '').toLowerCase();
+    
+    const agentMatch = !agent || rAgent === agent;
+    const areaMatch = !area || rArea === area;
+    const searchMatch = !search || rSearch.includes(search);
+    
     if (agentMatch && areaMatch && searchMatch) {
-      row.style.display = '';
+      row.classList.remove('hidden');
       visible++;
     } else {
-      row.style.display = 'none';
+      row.classList.add('hidden');
     }
   });
-  document.getElementById('countBadge').textContent = visible + ' ticket' + (visible !== 1 ? 's' : '');
-  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
-  document.getElementById('ticketTable').style.display = visible === 0 ? 'none' : '';
+  
+  document.getElementById('result-count').textContent = visible + ' ticket' + (visible !== 1 ? 's' : '');
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  document.querySelector('.table-wrap table').style.display = visible === 0 ? 'none' : '';
 }
 
 function clearFilters() {
-  document.getElementById('agentFilter').value = '';
-  document.getElementById('areaFilter').value = '';
-  document.getElementById('searchFilter').value = '';
+  document.getElementById('filter-agent').value = '';
+  document.getElementById('filter-area').value = '';
+  document.getElementById('filter-search').value = '';
   applyFilters();
 }
 </script>
+
 </body>
 </html>
